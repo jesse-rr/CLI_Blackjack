@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/jesse-rr/CLI_Black_jack/blob/main/run/blackjack.png" alt="Help screen">
+  <img src="https://github.com/jesse-rr/CLI_Blackjack/blob/main/21.png" alt="Help screen">
 </p>
 
 #### ♣️ ♦️ Requirements ♥️ ♠️
