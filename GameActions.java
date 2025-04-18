@@ -173,14 +173,20 @@ public class GameActions {
     }
 
     public static boolean doubleDownLogic(List<String> dealer_cards, List<String> player_cards, TableActions table, double insurance, Player player, double bet, int dealerCardNumber, int playerCardNumber) throws IOException, InterruptedException {
+        if (player.getBalance() < bet) {
+            System.out.println("You don't have enough balance to double down!");
+            Thread.sleep(1000);
+            return true;
+        }
+
         if (!table.canDoubleDown(player_cards, playerCardNumber)) {
             System.out.println("You can only double down if your total is 11 or less.");
             Thread.sleep(1000);
             return true;
         }
+
         System.out.println("Player chooses to double down. One more card will be dealt!");
         Thread.sleep(1000);
-
 
         player.setBalance(player.getBalance() - bet);
         bet = bet * 2;
