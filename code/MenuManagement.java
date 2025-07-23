@@ -34,6 +34,7 @@ public class MenuManagement {
     }
 
     public static void printFullBoard(List<String> dealer_cards, List<String> player_cards, int dealerCardNumber, int playerCardNumber, boolean isDealerCards, TableActions table) {
+        clearScreen();
         int sum;
         if (isDealerCards) {
             sum = table.sumCards(dealer_cards.subList(0, dealerCardNumber - 1));
