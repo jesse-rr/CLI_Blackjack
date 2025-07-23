@@ -8,8 +8,9 @@
 #### 🃏 Running the game 🃏 
 
 ```
-git clone https://github.com/ifsc-sj-projetos/CLI_Blackjack.git
-java -cp CLI_Blackjack/run/ code.Startup
+git clone https://github.com/jesse-rr/CLI_Blackjack.git &&
+cd CLI_Blackjack &&
+java -cp out/production/CLI_Blackjack code.Startup
 ```
 
 __Feel free to contribute to the project, add new features, or report any bugs you encounter. Enjoy!__
