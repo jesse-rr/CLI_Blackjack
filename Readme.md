@@ -9,7 +9,7 @@
 
 ```
 git clone https://github.com/ifsc-sj-projetos/CLI_Blackjack.git
-java -cp CLI_Blackjack/run/ Startup
+java -cp CLI_Blackjack/run/ code.Startup
 ```
 
 __Feel free to contribute to the project, add new features, or report any bugs you encounter. Enjoy!__

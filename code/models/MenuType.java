@@ -1,0 +1,14 @@
+package code.models;
+
+public enum MenuType {
+    MAIN_MENU,
+    HELP_MENU,
+    USER_ACCESS_MENU,
+    DEALER_TOP_MENU,
+    PLAYER_BOTTOM_MENU,
+    INITIAL_BET_MENU,
+    ACCOUNT_INFO_MENU,
+    GAME_ACTIONS_MENU,
+    HIT_STAND_MENU,
+    INVALID_OPTION_TEXT
+}
