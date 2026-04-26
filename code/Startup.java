@@ -1,15 +1,22 @@
 package code;
 
 import code.models.Player;
-
+import code.game.GameActions;
+import code.persistence.SaveManagement;
+import code.ui.MenuManagement;
 import java.io.*;
 import java.util.*;
 
 public class Startup {
-    private static final int SLEEP_SHORT = 1000; // 1 second
+    private static final int SLEEP_SHORT = 1000;
 
     public static void main(String[] args) {
-        displayFirstMenu();
+        try {
+            displayFirstMenu();
+        } catch (Exception e) {
+            System.out.println("Critical error in main application: " + e.getMessage());
+            System.exit(1);
+        }
     }
 
     private static void displayFirstMenu() {
@@ -27,7 +34,7 @@ public class Startup {
                     default: showInvalidChoice();
                 }
             } catch (IOException | InterruptedException e) {
-                System.err.println("An error occurred: " + e.getMessage());
+                System.out.println("Error in main menu loop: " + e.getMessage());
             }
         }
     }
@@ -53,7 +60,6 @@ public class Startup {
                 Player loggedInPlayer = SaveManagement.findPlayer(username, password);
 
                 if (loggedInPlayer != null) {
-                    System.out.println("Login successful!");
                     Thread.sleep(SLEEP_SHORT);
                     mainMenu(loggedInPlayer);
                     return;
@@ -101,14 +107,12 @@ public class Startup {
         Player newPlayer = new Player(username, password, 2000.0, 0.0, 0, 0);
         SaveManagement.createPlayer(newPlayer);
 
-        System.out.println("User signed up successfully!");
         Thread.sleep(SLEEP_SHORT);
         login();
     }
 
     private static void playAsGuest() throws IOException, InterruptedException {
         Player guestPlayer = new Player("Guest", "", 1000.0, 0.0, 0, 0);
-        System.out.println("Playing as Guest.");
         Thread.sleep(SLEEP_SHORT);
         mainMenu(guestPlayer);
     }
@@ -122,7 +126,8 @@ public class Startup {
             String menuChoice = userInput.next().trim().toLowerCase();
 
             switch (menuChoice) {
-                case "s": startGame(player);
+                case "s":
+                    GameActions.startGame(player);
                     break;
                 case "a": account(player);
                     break;
@@ -130,9 +135,7 @@ public class Startup {
                     exitMenu = true;
                     if (!player.getName().equalsIgnoreCase("guest")) {
                         SaveManagement.savePlayerInfo(player);
-                        System.out.println("Player data saved.");
                     }
-                    System.out.println("Exiting game. Goodbye!");
                     Thread.sleep(SLEEP_SHORT);
                     break;
                 case "h": helpMenu();
@@ -162,7 +165,7 @@ public class Startup {
         while (!exitAccount) {
             MenuManagement.showAccountInfoMenu(
                     player.getName(),
-                    player.getBalance(),
+                    player.getGemstones(),
                     player.getWinRate(),
                     player.getWins(),
                     player.getLoses()
@@ -174,47 +177,6 @@ public class Startup {
                 showInvalidChoice();
             }
         }
-    }
-
-    private static void startGame(Player player) throws IOException, InterruptedException {
-        if (player.getBalance() <= 0) {
-            System.out.println("Sorry, your balance is R$0.00. You can't play right now.");
-            Thread.sleep(SLEEP_SHORT * 2);
-            if (!player.getName().equalsIgnoreCase("guest")) {
-                System.out.println("As a loyal player, we'll give you R$500.00 to continue playing!");
-                player.setBalance(500.00);
-                SaveManagement.savePlayerInfo(player);
-                Thread.sleep(SLEEP_SHORT * 2);
-            } else {
-                System.out.println("Guest accounts cannot receive free balance. Please sign up to continue playing.");
-                Thread.sleep(SLEEP_SHORT * 2);
-                return;
-            }
-        }
-
-        double bet = 0;
-        Scanner userInput = new Scanner(System.in);
-
-        while (true) {
-            MenuManagement.showInitialBetMenu(player.getBalance());
-            System.out.print("Enter your bet amount: R$ ");
-            String input = userInput.next().trim().replace(',', '.');
-            try {
-                bet = Double.parseDouble(input);
-                if (bet <= 0 || bet > player.getBalance()) {
-                    System.out.println("Invalid bet amount. Please enter a positive amount within your balance.");
-                    Thread.sleep(SLEEP_SHORT);
-                } else {
-                    break;
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid input! Please enter a valid number for your bet.");
-                Thread.sleep(SLEEP_SHORT);
-            }
-        }
-
-        player.setBalance(player.getBalance() - bet);
-        GameActions.table(player, bet);
     }
 
     private static void showInvalidChoice() throws InterruptedException {

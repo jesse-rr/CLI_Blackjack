@@ -1,0 +1,15 @@
+package code.models.enums;
+
+public enum MenuType {
+    MAIN_MENU,
+    HELP_MENU,
+    USER_ACCESS_MENU,
+    DEALER_TOP_MENU,
+    PLAYER_BOTTOM_MENU,
+    ACCOUNT_INFO_MENU,
+    GAME_ACTIONS_MENU,
+    INVALID_OPTION_TEXT,
+    MAP_MENU,
+    SKILL_SELECTION_MENU,
+    DECK_SELECTION_MENU
+}

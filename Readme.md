@@ -1,19 +1,55 @@
+# CLI Blackjack
+
+A command-line Blackjack game with multiple dealer types, a game map system with 6 nodes, and a final boss battle.
+
+## Screenshots
+
 <p align="center">
-  <img src="https://github.com/jesse-rr/CLI_Blackjack/blob/main/21.png" alt="Help screen">
+  <img src="Blackjack_1.png" alt="Main Menu">
 </p>
+
 <p align="center">
-  <img width="960" height="611" alt="image" src="https://github.com/user-attachments/assets/4d91da96-42a8-4782-976b-12a79f471eb7" alt="Example of Game"/>
+  <img src="Blackjack_2.png" alt="Game Description">
 </p>
 
-#### ♣️ ♦️ Requirements ♥️ ♠️
-- Java 17 [ Text blocks are used ]
+## Requirements
 
-#### 🃏 Running the game 🃏 
+- **JDK 17** or higher
+- Java text blocks feature support (JDK 17+)
 
+## How to Run
+
+1. Clone the repository:
+```bash
+git clone https://github.com/jesse-rr/CLI_Blackjack.git
+cd CLI_Blackjack
 ```
-git clone https://github.com/jesse-rr/CLI_Blackjack.git &&
-cd CLI_Blackjack &&
+
+2. Compile the project:
+```bash
+javac -d out/production/CLI_Blackjack code/Startup.java code/game/*.java code/models/*.java code/models/dealer/*.java code/models/enums/*.java code/models/systems/*.java code/persistence/*.java code/ui/*.java code/utils/*.java
+```
+
+3. Run the game:
+```bash
 java -cp out/production/CLI_Blackjack code.Startup
 ```
 
-__Feel free to contribute to the project, add new features, or report any bugs you encounter. Enjoy!__
+## Gameplay
+
+Navigate through 6 map nodes with multiple choices at each location. Each node presents 3 options: 1 Dealer encounter and 2 Hidden choices. Defeat dealers using different strategies based on their types:
+
+- **Standard Dealer**: Fair play with normal blackjack rules
+- **Rogue Dealer**: Cheats by swapping cards for better outcomes
+- **Advantaged Dealer**: Higher blackjack chance and stands on 18
+
+Manage your lives (3 total) as losing a hand costs one life. Hidden nodes may reveal dealers, cashouts, life recovery, or debuffs. The Boss (Round 7) combines all dealer abilities.
+
+## What to Expect
+
+- Strategic blackjack gameplay with multiple difficulty levels
+- Interactive map-based progression system
+- Account management with game statistics
+- Terminal-based UI with ASCII art
+- Multiple dealer types with unique behaviors
+- Boss battle with combined dealer abilities
